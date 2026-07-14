@@ -3,7 +3,7 @@ package com.rishikesh.demo.DependencyInjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class OrderService {
     //    @Autowired //Field injection
     PaymentService paymentService;

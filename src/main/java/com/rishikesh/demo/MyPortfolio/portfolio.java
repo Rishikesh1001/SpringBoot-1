@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MyPortfolio {
+public class portfolio {
 
     @GetMapping("/myself")
     public String mySelf(){
@@ -38,4 +38,5 @@ public class MyPortfolio {
                 <h2> Graduation: B.Tech CSE (
                 """;
     }
+
 }
