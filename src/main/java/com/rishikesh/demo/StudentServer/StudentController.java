@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentController {
 
     StudentService studentService;
-
     @Autowired
+
+
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
