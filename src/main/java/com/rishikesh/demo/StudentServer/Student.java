@@ -1,31 +1,22 @@
 package com.rishikesh.demo.StudentServer;
-
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    String name;
-    int age;
-    String department;
+    private int id;
+    private String name;
+    private int age;
+    private String department;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
@@ -35,14 +26,12 @@ public class Student {
         this.createdAt = createdAt;
     }
 
-
-
-    public String getName() {
-        return name;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public int getId() {
@@ -51,6 +40,14 @@ public class Student {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getAge() {
@@ -68,6 +65,4 @@ public class Student {
     public void setDepartment(String department) {
         this.department = department;
     }
-
-
 }

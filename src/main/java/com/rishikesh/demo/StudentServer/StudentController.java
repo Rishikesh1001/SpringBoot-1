@@ -1,31 +1,61 @@
 package com.rishikesh.demo.StudentServer;
 
 
+import com.rishikesh.demo.StudentServer.Student;
+import com.rishikesh.demo.StudentServer.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class StudentController {
 
     StudentService studentService;
+
     @Autowired
-
-
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Student> storeStudent(@RequestBody Student student) {
-        Student result = studentService.studentValidator(student);
+    public ResponseEntity<?> storeStudent(@RequestBody Student student) {
+        Student result = studentService.studentValidate(student);
 
         if(result == null)
         {
-            return ResponseEntity.status(400).body(result);
+            return ResponseEntity.status(400).body("Invalid input");
         }
         return  ResponseEntity.status(201).body(result);
+    }
+
+    @GetMapping("/getStudent/{id}")
+    public ResponseEntity<?> getStudentById(@PathVariable int id){
+
+        Student student = studentService.getStudentById(id);
+
+        if(student == null){
+            return ResponseEntity.status(404).body("Student not found");
+        }
+
+        return ResponseEntity.ok(student);
+    }
+
+    @PutMapping("/updateStudent/{id}")
+    public ResponseEntity<?> updateStudent(@PathVariable int id, @RequestBody Student student){
+        Student result = studentService.studentUpdate(id, student);
+        if(result == null)
+        {
+            return ResponseEntity.status(400).body("Invalid input");
+        }
+        return ResponseEntity.status(200).body(result);
+    }
+
+    @DeleteMapping("/deleteStudent/{id}")
+    public ResponseEntity<?> deleteStudent(@PathVariable int id){
+        Student student = studentService.deleteStudent(id);
+        if(student == null) {
+            return ResponseEntity.status(400).body("Invalid input");
+        }
+        return ResponseEntity.status(200).body("Student deleted");
     }
 }
