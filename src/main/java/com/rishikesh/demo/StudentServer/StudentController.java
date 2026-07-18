@@ -20,7 +20,7 @@ public class StudentController {
 
     @PostMapping("/create")
     public ResponseEntity<Student> storeStudent(@RequestBody Student student) {
-        Student result = studentService.studentValidate(student);
+        Student result = studentService.studentValidator(student);
 
         if(result == null)
         {
