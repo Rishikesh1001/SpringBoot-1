@@ -1,6 +1,8 @@
 package com.rishikesh.demo.StudentServer;
 
 
+import com.rishikesh.demo.StudentServer.DTO.CreateStudentRequestDTO;
+import com.rishikesh.demo.StudentServer.DTO.CreateStudentResponseDTO;
 import com.rishikesh.demo.StudentServer.Student;
 import com.rishikesh.demo.StudentServer.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,9 @@ public class StudentController {
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
-
     @PostMapping("/create")
-    public ResponseEntity<?> storeStudent(@RequestBody Student student) {
-        Student result = studentService.studentValidate(student);
+    public ResponseEntity<?> storeStudent(@RequestBody CreateStudentRequestDTO createStudentRequestDTO) {
+        CreateStudentResponseDTO result = studentService.studentValidate(createStudentRequestDTO);
 
         if(result == null)
         {
@@ -27,6 +28,17 @@ public class StudentController {
         }
         return  ResponseEntity.status(201).body(result);
     }
+
+    //@PostMapping("/create")
+//    public ResponseEntity<?> storeStudent(@RequestBody Student student) {
+//        Student result = studentService.studentValidate(student);
+//
+//        if(result == null)
+//        {
+//            return ResponseEntity.status(400).body("Invalid input");
+//        }
+//        return  ResponseEntity.status(201).body(result);
+//    }
 
     @GetMapping("/getStudent/{id}")
     public ResponseEntity<?> getStudentById(@PathVariable int id){
