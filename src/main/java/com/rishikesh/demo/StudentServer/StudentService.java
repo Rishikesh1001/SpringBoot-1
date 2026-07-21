@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -21,8 +22,13 @@ public class StudentService {
     public CreateStudentResponseDTO studentValidate(CreateStudentRequestDTO createStudentRequestDTO) {
 
         Student student = mapToStudent(createStudentRequestDTO);
+
+        // Save into database
+        student = studentRepository.save(student);
+
         return mapToResponseDTO(student);
     }
+
 
 //    public Student studentValidate(Student student) {
 //
@@ -44,7 +50,9 @@ public class StudentService {
 //    }
 
     public Student getStudentById(int id) {
-        return studentRepository.findById(id).orElse(null);
+        Optional<Student> student = studentRepository.findById(id);
+        return student.get();
+        //return studentRepository.findById(id).orElse(null);
     }
 
     public Student studentUpdate(int id, Student student) {
